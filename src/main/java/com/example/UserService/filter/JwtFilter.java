@@ -6,6 +6,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
@@ -16,6 +17,7 @@ import java.util.ArrayList;
 
 @Component
 @RequiredArgsConstructor
+@Log4j2
 public class JwtFilter extends OncePerRequestFilter {
     private JwtUtil jwtUtil;
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,
@@ -23,6 +25,7 @@ public class JwtFilter extends OncePerRequestFilter {
         String authHeader=request.getHeader("Authorization");
         if(authHeader!=null&&authHeader.startsWith("Bearer ")){
             String token=authHeader.substring(7);
+            log.info("jwt token is :"+token);
             if(jwtUtil.validateToken(token)){
                 String username=jwtUtil.extractUserName(token);
                 UsernamePasswordAuthenticationToken authentication =
