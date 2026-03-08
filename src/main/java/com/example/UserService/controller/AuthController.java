@@ -25,7 +25,7 @@ public class AuthController {
             throw new RuntimeException("user credential are not valid check username and password");
 
         }
-        return jwtUtil.genreateToken(user.getUsermail());
+        return jwtUtil.genreateToken(user.getUsermail(),user.getRole());
 
 
     }

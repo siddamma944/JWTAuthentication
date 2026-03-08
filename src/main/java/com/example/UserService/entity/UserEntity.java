@@ -1,5 +1,6 @@
 package com.example.UserService.entity;
 
+import com.example.UserService.DTO.UserRole;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -16,4 +17,5 @@ public class UserEntity {
     @Column(unique = true)
     private String usermail;
     private String password;
+    private UserRole role;
 }

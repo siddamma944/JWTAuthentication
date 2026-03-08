@@ -4,6 +4,7 @@ import com.example.UserService.entity.UserEntity;
 import com.example.UserService.service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -19,10 +20,12 @@ public class UserController {
         return new ResponseEntity<>(userResult, HttpStatus.CREATED);
 
     }
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/user/{id}")
     public ResponseEntity<UserEntity> getUserById(@PathVariable("id") Long id){
        UserEntity user= userService.getUserById(id);
        return new ResponseEntity<>(user,HttpStatus.OK);
 
     }
+
 }
